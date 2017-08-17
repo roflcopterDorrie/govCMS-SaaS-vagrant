@@ -1,3 +1,6 @@
 docroot
 vendor
 .idea
+Vagrantfile
+.beetbox
+.vagrant
