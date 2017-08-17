@@ -1,0 +1,46 @@
+// Global header
+// UI-kit overrides
+.page-header {
+  box-shadow: none;
+  background-color: $white;
+  padding-bottom: $base-spacing/2;
+  padding-top: $base-spacing/2;
+  @include media($tablet) {
+    padding-bottom: $base-spacing;
+    padding-top: $base-spacing;
+  }
+  .region-header {
+    margin-bottom: 0;
+    @include media($tablet) {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+header[role='banner'] .page-header__logo {
+  padding: 0;
+  text-align: left;
+  img {
+    background-size: contain;
+    display: inline-block;
+    width: 170px; //Revisit
+    height: 41px; //Revisit
+
+    @include media($tablet) {
+      width: 227px; //Revisit
+      height: 55px; //Revisitß
+    }
+
+    @include media($desktop) {
+      width: 300px;
+      height: 72px;
+    }
+  }
+  a {
+    border-bottom: 0;
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+}

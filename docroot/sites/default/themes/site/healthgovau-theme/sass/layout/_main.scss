@@ -1,0 +1,42 @@
+body main {
+  -ms-flex: none;
+}
+.node-type-campaign {
+  main {
+    padding: 0px;
+    max-width: 100%;
+  }
+
+  article.content-main {
+    width: 100%;
+    h1.title {
+      display: none;
+    }
+    @include media($mobile) {
+      .inline-tab-nav,
+      .workbench-info-block,
+      .messages {
+        max-width: 75em;
+        margin: auto;
+      }
+      @include span-columns(8 of 8);
+    }
+  }
+}
+
+.node-type-video,
+.page-search404,
+.page-node-1,
+.page-campaign-videos {
+  article.content-main {
+    width: 100%;
+  }
+}
+
+// Override UIkit
+main {
+  padding-top: $medium-spacing;
+  @include media($tablet) {
+    padding-top: $large-spacing;
+  }
+}

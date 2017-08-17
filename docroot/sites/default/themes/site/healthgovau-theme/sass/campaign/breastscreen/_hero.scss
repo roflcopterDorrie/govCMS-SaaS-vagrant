@@ -1,0 +1,47 @@
+// Tweaks for mobile positioning
+.breastscreen {
+  .hero {
+    .hero-bg {
+      @include media($mobile) {
+        background-position-y: 22px;
+      }
+      //height: 225px;
+      @include media($tablet) {
+        background-position-y: 10px; //reset
+        height: $hero-background-height-tablet;
+      }
+      @include media($desktop) {
+        height: $hero-background-height-desktop;
+      }
+    }
+    .campaign-logo {
+      @include media($mobile) {
+        max-height: 160px;
+        margin-top: 40px;
+      }
+    }
+  }
+  .hero--content {
+    .hero-bg {
+      background-position-y: -14px;
+      @include media($tablet) {
+        background-position-y: -30px; //reset
+      }
+      @include media($desktop) {
+        background-position-y: -70px; //reset
+      }
+    }
+    .campaign-logo {
+      max-height: 122px;
+      margin-top: -16px;
+      @include media($tablet) {
+        max-height: 204px;
+        margin-top: -28px;
+      }
+      @include media($desktop) {
+        max-height: 263px;
+        margin-top: -36px;
+      }
+    }
+  }
+}

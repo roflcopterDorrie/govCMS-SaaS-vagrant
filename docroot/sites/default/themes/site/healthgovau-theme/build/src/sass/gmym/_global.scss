@@ -1,0 +1,94 @@
+
+
+// List override
+.list-vertical > li,
+.list-vertical--thirds > li,
+.list-vertical--fourths > li,
+footer[role='contentinfo'] .footer-top nav > li {
+  border-color: $cyan;
+}
+
+// Mean feature band
+.features {
+  .list-vertical > li,
+  .list-vertical--thirds > li,
+  .list-vertical--fourths > li {
+    border-top: 0;
+  }
+
+  .list-vertical > li article,
+  .list-vertical--thirds > li article,
+  .list-vertical--fourths > li article {
+    margin-top: $small-spacing;
+  }
+}
+
+// Activities
+.activity__hero {
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(6 of 12);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8 of 16);
+  }
+  h3 {
+    font-weight: $base-font-weight;
+    margin-top: 0;
+  }
+}
+.activity__hero-image {
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(3 of 6);
+  }
+
+  @include media($desktop) {
+    @include span-columns(4 of 8);
+  }
+}
+.activity__hero-desc {
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(3 of 6);
+  }
+
+  @include media($desktop) {
+    @include span-columns(4 of 8);
+  }
+}
+.activity__selector {
+  background: $grey-light;
+  padding: $medium-spacing;
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(6 of 12);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8 of 16);
+  }
+  h3 {
+    font-weight: $base-font-weight;
+    margin-top: 0;
+  }
+}
+
+
+// Social
+.social__feature {
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(3 of 12);
+  }
+
+  @include media($desktop) {
+    @include span-columns(3 of 16);
+  }
+}

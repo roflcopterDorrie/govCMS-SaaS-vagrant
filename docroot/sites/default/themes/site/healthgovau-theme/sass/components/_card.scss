@@ -1,0 +1,21 @@
+// Cards
+.list--cards {
+  > li {
+    background-color: #fff;
+    border-top: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    margin-bottom: $medium-spacing;
+    @include box-shadow();
+    article {
+      margin: $medium-spacing;
+    }
+    figure {
+      img {
+        height: auto;
+      }
+    }
+  }
+}
+

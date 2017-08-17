@@ -1,0 +1,53 @@
+@function image-url($url) {
+  @return url('#{$health-image-base-url}#{$url}');
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Font weights
+.light {
+  font-weight: $base-font-weight;
+}
+
+@mixin box-shadow($top: 0, $left: 3px, $blur: 20px, $color: $shadow-color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin blur($px: 0) {
+  -webkit-filter: blur(#{$px}px) !important;
+  -ms-filter: blur(#{$px}px) !important;
+  -moz-filter: blur(#{$px}px) !important;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'blur\'><feGaussianBlur stdDeviation=\'#{$px}\' /></filter></svg>#blur");
+  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='#{$px}');
+}
+
+@mixin border-top($colour: $border-colour, $size: 1px){
+  border-top: $colour solid $size;
+}
+
+// Replicate h2 mixin
+@mixin h3 {
+  font-size: rem(24);
+  margin-top: $medium-spacing + ($small-spacing / 3); // 38.133px; was 34.4px from Alz.
+  margin-bottom: $small-spacing;
+
+  @include media($tablet) {
+    font-size: rem(26);
+  }
+
+  @include ie-lte(8) {
+    font-size: 26px;
+  }
+}

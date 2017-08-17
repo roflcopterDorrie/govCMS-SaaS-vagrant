@@ -1,0 +1,74 @@
+// Social
+.social__feed {
+  @include span-columns(4 of 4);
+
+  @include media($tablet) {
+    @include span-columns(9 of 12);
+  }
+
+  @include media($desktop) {
+    @include span-columns(13 of 16);
+  }
+  h3 {
+    font-weight: $base-font-weight;
+    margin-top: 0;
+  }
+}
+
+.social__links {
+  padding-left: 0;
+  .social__links-item {
+    list-style-type: none;
+    display: block;
+    margin-right: 0;
+
+    @include media($tablet) {
+      display: inline;
+      margin-right: $medium-spacing;
+    }
+
+    // Font Awesome implementation
+    a {
+      @extend %baseicon;
+      &.youtube:before {
+        content: "\f16a";
+      }
+      &.twitter:before {
+        content: "\f099";
+      }
+      &.facebook:before {
+        content: "\f09a";
+      }
+      &.email:before {
+        content: "\f003";
+      }
+      &.linkedin:before {
+        content: "\f0e1";
+      }
+      &.instagram:before {
+        content: "\f16d";
+      }
+      display: inline;
+      margin-right: 0;
+      &:after {
+        background-image: none;
+      }
+    }
+  }
+  h3 {
+    margin-top: 0;
+  }
+}
+
+// Forces stacked across breakpoints
+.social__links--stacked {
+  @extend .social__links;
+  .social__links-item {
+    display: block;
+    margin-right: 0;
+  }
+}
+
+#block-bean-share-this {
+  @extend .band;
+}
