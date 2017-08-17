@@ -11,4 +11,4 @@ This is a container that Department of Health is using to implement Acquia Site 
 3. Run ```vagrant up```
 4. Update ```sitefactory.yml``` with you site factory details
 5. Run ```composer import```
-6. Visit ```http://saas.local``` to see the site running locally
+6. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally
