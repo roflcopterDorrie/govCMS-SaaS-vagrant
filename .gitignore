@@ -1,2 +1,3 @@
-./docroot
-./vendor
+docroot
+vendor
+.idea
