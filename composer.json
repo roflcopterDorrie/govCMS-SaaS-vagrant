@@ -22,17 +22,32 @@
     "beet/box": "^0.6.5"
   },
   "scripts": {
-    "import": [
+    "download": [
       "mkdir backup",
       "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
       "cd backup && tar -zxvf backup.tar.gz",
       "mv ./backup/docroot ./",
       "mv ./backup/database.sql ./",
-      "rm -rf ./backup",
+      "rm -rf ./backup"
+    ],
+    "import": [
       "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
       "rm -rf database.sql",
       "cp settings.php ./docroot/sites/default/",
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all; drush uli'"
+    ],
+    "importdb": [
+      "mkdir backup",
+      "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
+      "cd backup && tar -zxvf backup.tar.gz",
+      "mv ./backup/database.sql ./",
+      "rm -rf ./backup",
+      "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
+      "rm -rf database.sql",
+      "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all; drush uli'"
+    ],
+    "cc": [
+      "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all'"
     ]
   }
 }

@@ -8,7 +8,16 @@ This is a container that Department of Health is using to implement Acquia Site 
 
 1. ```git clone``` this repo from github
 2. Run ```composer install```
-3. Run ```vagrant up```
-4. Copy ```sitefactory.default.yml``` to ```sitefactory.yml``` with you site factory details
-5. Run ```composer import```
-6. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally
+3. Copy ```sitefactory.default.yml``` to ```sitefactory.yml``` with you site factory details
+4. Run ```composer download```
+5. Run ```vagrant up```
+6. Run ```composer import```
+7. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally
+
+## Import database
+
+Run ```composer importdb``` to pull the live database and import locally
+
+## Clear cache
+
+Run ```composer cc```
