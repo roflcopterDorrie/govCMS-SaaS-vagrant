@@ -48,6 +48,9 @@
     ],
     "cc": [
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all'"
+    ],
+    "uli": [
+      "vagrant ssh -c 'cd /var/beetbox/docroot; drush uli'"
     ]
   }
 }
