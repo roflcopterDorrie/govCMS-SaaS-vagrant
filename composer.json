@@ -34,7 +34,8 @@
       "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
       "rm -rf database.sql",
       "cp settings.php ./docroot/sites/default/",
-      "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all; drush user-unblock 1; drush uli'"
+      "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all; drush user-unblock 1'",
+      "cd ./docroot/sites/default/themes; rm -rf site; git clone https://github.com/healthgovau/healthgovau-campaigns.git; mv ./heathgovau-campaigns ./site"
     ],
     "importdb": [
       "mkdir backup",
