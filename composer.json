@@ -22,6 +22,9 @@
     "beet/box": "^0.6.5"
   },
   "scripts": {
+    "backup": [
+      "vendor/bin/AcquiaSiteFactoryCli app:createBackup"
+    ],
     "download": [
       "mkdir backup",
       "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
@@ -38,6 +41,8 @@
       "cd ./docroot/sites/default/themes; rm -rf site; git clone https://github.com/healthgovau/healthgovau-campaigns.git; mv ./heathgovau-campaigns ./site"
     ],
     "importdb": [
+      "composer backup",
+      "sleep 1m",
       "mkdir backup",
       "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
       "cd backup && tar -zxvf backup.tar.gz",
