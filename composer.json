@@ -31,7 +31,8 @@
       "cd backup && tar -zxvf backup.tar.gz",
       "mv ./backup/docroot ./",
       "mv ./backup/database.sql ./",
-      "rm -rf ./backup"
+      "rm -rf ./backup",
+      "chmod 777 ./docroot/sites/default/files"
     ],
     "import": [
       "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
