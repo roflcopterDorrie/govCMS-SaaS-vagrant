@@ -59,6 +59,15 @@
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom'",
       "composer cc"
     ],
+    "importFile": [
+      "composer backup",
+      "sleep 1m",
+      "mkdir backup",
+      "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
+      "cd backup && tar -zxvf backup.tar.gz",
+      "mv ./backup/docroot/sites/default/files ./docroot/sites/default/",
+      "rm -rf ./backup"
+    ],
     "cc": [
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all'"
     ],
