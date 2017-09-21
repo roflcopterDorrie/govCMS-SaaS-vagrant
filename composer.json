@@ -44,7 +44,7 @@
     "importdb": [
       "composer backup",
       "sleep 1m",
-      "mkdir backup",
+      "rm -rf backup; mkdir backup",
       "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
       "cd backup && tar -zxvf backup.tar.gz",
       "mv ./backup/database.sql ./",
@@ -62,10 +62,10 @@
     "importFile": [
       "composer backup",
       "sleep 1m",
-      "mkdir backup",
+      "rm -rf backup; mkdir backup",
       "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
       "cd backup && tar -zxvf backup.tar.gz",
-      "mv ./backup/docroot/sites/default/files ./docroot/sites/default/",
+      "chmod 777 ./docroot/sites/default/files; mv ./backup/docroot/sites/default/files ./docroot/sites/default/",
       "rm -rf ./backup"
     ],
     "cc": [
