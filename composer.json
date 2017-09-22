@@ -63,6 +63,9 @@
     "cc": [
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all'"
     ],
+    "ccsite": [
+      "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
+    ],
     "uli": [
       "vagrant ssh -c 'cd /var/beetbox/docroot; drush uli'"
     ]
