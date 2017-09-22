@@ -20,5 +20,5 @@ Run ```composer importdb``` to pull the live database and files and import local
 
 ## Clear cache
 
-Run ```composer cc``` to clear local cache
-Run ```composer ccsite``` to clear site factory cache
+Run ```composer cc``` to clear local cache.  
+Run ```composer ccsite``` to clear site factory cache.
