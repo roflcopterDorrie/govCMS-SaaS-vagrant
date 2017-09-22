@@ -16,8 +16,9 @@ This is a container that Department of Health is using to implement Acquia Site 
 
 ## Import database
 
-Run ```composer importdb``` to pull the live database and import locally
+Run ```composer importdb``` to pull the live database and files and import locally
 
 ## Clear cache
 
-Run ```composer cc```
+Run ```composer cc``` to clear local cache
+Run ```composer ccsite``` to clear site factory cache
