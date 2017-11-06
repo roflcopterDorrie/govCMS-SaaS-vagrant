@@ -10,7 +10,10 @@
   ],
   "type": "project",
   "require": {
-    "rujiali/acquia-site-factory-cli": "dev-master"
+    "rujiali/acquia-site-factory-cli": "dev-master",
+    "drush/drush": "^8.1",
+    "wikimedia/composer-merge-plugin": "^1.4.0",
+    "composer/installers": "^1.0.20"
   },
   "repositories": [
     {
@@ -56,18 +59,25 @@
     ],
     "resetdb": [
       "composer cc",
-      "vagrant ssh -c 'cd /var/beetbox/docroot; drush user-unblock 1; drush uli; drush -q vset cache 0; drush -q vset preprocess_css 0; drush -q vset preprocess_js 0; drush -q vset page_cache_maximum_age 0; drush -q vset views_skip_cache TRUE; drush -q vset \"shield_user\" \"\"; drush -q vset -y error_level 2;'",
-      "vagrant ssh -c 'cd /var/beetbox/docroot; drush dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom'",
+      "drush @govCMS-SaaS-vagrant.local user-unblock 1",
+      "drush @govCMS-SaaS-vagrant.local uli",
+      "drush @govCMS-SaaS-vagrant.local -q vset cache 0",
+      "drush @govCMS-SaaS-vagrant.local -q vset preprocess_css 0",
+      "drush @govCMS-SaaS-vagrant.local -q vset preprocess_js 0",
+      "drush @govCMS-SaaS-vagrant.local -q vset page_cache_maximum_age 0",
+      "drush @govCMS-SaaS-vagrant.local -q vset views_skip_cache TRUE",
+      "drush @govCMS-SaaS-vagrant.local -q vset -y error_level 2",
+      "drush @govCMS-SaaS-vagrant.local dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom, shield",
       "composer cc"
     ],
     "cc": [
-      "vagrant ssh -c 'cd /var/beetbox/docroot; drush cc all'"
+      "drush @govCMS-SaaS-vagrant.local cc all'"
     ],
     "ccsite": [
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
     ],
     "uli": [
-      "vagrant ssh -c 'cd /var/beetbox/docroot; drush uli'"
+      "drush @govCMS-SaaS-vagrant.local uli'"
     ]
   }
 }
