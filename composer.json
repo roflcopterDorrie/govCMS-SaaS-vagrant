@@ -75,8 +75,8 @@
     ],
     "ccsite": [
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
-    ],
-    "uli": [
+	    ],
+    "login": [
       "drush @govCMS-SaaS-vagrant.local uli'"
     ]
   }
