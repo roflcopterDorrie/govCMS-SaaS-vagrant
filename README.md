@@ -4,6 +4,11 @@
 
 This is a container that Department of Health is using to implement Acquia Site Factory site in local developing evironment.
 
+## Dependency
+
+wget is used for downloading backup from Amazon S3.
+This tool is designed for Mac and Linux environments. 
+
 ## Usage
 
 1. ```git clone``` this repo from github
