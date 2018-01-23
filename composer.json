@@ -48,7 +48,7 @@
       "composer backup",
       "sleep 1m",
       "rm -rf backup; mkdir backup",
-      "wget -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
+      "wget -O --timeout=0 ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
       "cd backup && tar -zxvf backup.tar.gz",
       "mv ./backup/database.sql ./",
       "cp -R ./backup/docroot/sites/default/files/* ./docroot/sites/default/files/",
