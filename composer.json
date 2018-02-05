@@ -71,7 +71,7 @@
       "composer cc"
     ],
     "cc": [
-      "drush @govCMS-SaaS-vagrant.local cc all'"
+      "drush @govCMS-SaaS-vagrant.local cc all"
     ],
     "ccsite": [
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
