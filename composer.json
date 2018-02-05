@@ -77,7 +77,7 @@
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
 	    ],
     "login": [
-      "drush @govCMS-SaaS-vagrant.local uli'"
+      "drush @govCMS-SaaS-vagrant.local uli"
     ]
   }
 }
