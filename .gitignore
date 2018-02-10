@@ -5,3 +5,4 @@ Vagrantfile
 .beetbox
 .vagrant
 sitefactory.yml
+database.sql
