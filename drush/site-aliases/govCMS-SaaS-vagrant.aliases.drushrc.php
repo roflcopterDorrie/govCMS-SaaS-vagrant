@@ -13,9 +13,10 @@ if (!isset($drush_major_version)) {
   $drush_major_version = $drush_version_components[0];
 }
 
-// Determine a site alias domain based on configuration.
+// Determine a site alias domain based on configuration in
+// the root (we are in the ./drush directory).
 $parser = new Parser();
-$beetbox_settings = $parser->parse(file_get_contents('./sitefactory.yml'));
+$beetbox_settings = $parser->parse(file_get_contents('../.beetbox/config.yml'));
 if (isset($beetbox_settings['beet_domain'])) {
   $domain = $beetbox_settings['beet_domain'];
 }
