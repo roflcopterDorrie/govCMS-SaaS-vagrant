@@ -30,6 +30,7 @@ This tool is designed for Mac and Linux environments.
 ## Config
 
 The `sitefactory.yml` will look something like:
+
 ```
 username: joebloggs
 apikey: abcdef123456abcdef123456abcdef123456
@@ -64,11 +65,16 @@ theme in the repository. For these reason we:
 * clone the theme into `./theme-repo` and then link it to the codebase,
 * make database changes remotely, then sync locally.
 
-You can safely rebuild/remove the ./docroot directory without losing any work, including any
-custom settings.php file (see next section).
+You can safely rebuild/remove the ./docroot directory without losing any work.
 
-## Work with any 
+## Multiple builds
 
+Run multiple builds in the same directory by running:
+
+`git clone https://github.com/healthgovau/govCMS-SaaS-vagrant {ANYTHING}`
+
+The domain will become `{ANYTHING}.local` but the Drush alias will remain `@govCMS-SaaS-vagrant`
+for each site.
 
 ## Custom settings
 
@@ -77,11 +83,6 @@ stored outside the `docroot`. Just create a settings.local.php in the root and m
 configuration you need to.
 
 ## Beetbox domain
-
-Beetbox by default will create the site based on the name of the directory. If you've cloned the repo into
-a different directory the URL will be `{DIRECTORY}.local`.
-
-The drush alias will always be @govCMS-SaaS-vagrant.local. 
 
 The project is based on beetbox, so you can override
 [beetbox config](https://github.com/beetboxvm/beetbox/blob/master/.beetbox/config.yml) in .beetbox/config.yml
