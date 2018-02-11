@@ -25,45 +25,54 @@
     "beet/box": "^0.6.5"
   },
   "scripts": {
-    "config-test": [
+    "acsf-test": [
       "./vendor/bin/AcquiaSiteFactoryCli app:ping",
       "./vendor/bin/AcquiaSiteFactoryCli app:listSites",
       "./vendor/bin/AcquiaSiteFactoryCli app:getSiteDetails `grep site_id sitefactory.yml | cut -d' ' -f2`"
     ],
-    "backup": [
+    "build-clean": [
+      "rm -rf acsf-backup",
+      "rm -rf docroot",
+      "rm -rf theme-repo",
+      "rm -f acsf-database.sql",
+      "rm -f acsf-backup.tar.gz"
+    ],
+    "acsf-backup": [
       "vendor/bin/AcquiaSiteFactoryCli app:createBackup"
     ],
-    "download": [
-      "mkdir backup",
-      "wget --timeout=0 -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
-      "cd backup && tar -zxvf backup.tar.gz",
-      "mv ./backup/docroot ./",
-      "mv ./backup/database.sql ./",
-      "rm -rf ./backup",
-      "chmod 777 ./docroot/sites/default/files"
+    "acsf-download": [
+      "# This command assumes there is already a full site backup.",
+      "rm -rf ./acsf-backup",
+      "wget --timeout=0 -O acsf-backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)"
     ],
-    "import": [
-      "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
-      "rm -rf database.sql",
-      "cp settings.php ./docroot/sites/default/",
-      "composer resetdb",
-      "cd ./docroot/sites/default/themes; rm -rf site; git clone `grep theme_repo sitefactory.yml | cut -d' ' -f2`; mv ./`grep theme_name sitefactory.yml | cut -d' ' -f2` ./site"
+    "acsf-extract": [
+      "if [ ! -f acsf-backup.tar.gz ] ; then `composer acsf-download` ; fi",
+      "rm -rf ./acsf-backup",
+      "mkdir acsf-backup && tar -zxvf acsf-backup.tar.gz -C acsf-backup"
     ],
-    "importdb": [
-      "composer backup",
-      "sleep 1m",
-      "rm -rf backup; mkdir backup",
-      "wget --timeout=0 -O ./backup/backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
-      "cd backup && tar -zxvf backup.tar.gz",
-      "mv ./backup/database.sql ./",
-      "cp -R ./backup/docroot/sites/default/files/* ./docroot/sites/default/files/",
-      "rm -rf ./backup",
-      "vagrant ssh -c 'cd /var/beetbox; mysql beetbox < ./database.sql -u beetbox -pbeetbox'",
-      "rm -rf database.sql",
-      "composer resetdb"
+    "build-docroot": [
+      "if [ ! -d acsf-backup ] ; then `composer acsf-extract` ; fi",
+      "rm -rf ./docroot",
+      "mv ./acsf-backup/database.sql ./acsf-database.sql",
+      "mv ./acsf-backup/docroot ./",
+      "rm -rf acsf-backup",
+      "cp settings.beetbox.php ./docroot/sites/default/settings.php",
+      "if [ ! -d theme-repo ] ; then REPO=`grep theme_repo sitefactory.yml | cut -d' ' -f2` && git clone $REPO theme-repo ; fi",
+      "rm -Rf docroot/sites/default/themes/site && ln -s ../../../../theme-repo docroot/sites/default/themes/site"
+    ],
+    "build-drupal": [
+      "if [ ! -f acsf-database.sql ] ; then `composer build-docroot` ; fi",
+      "./vendor/bin/drush @govCMS-SaaS-vagrant.local sql-cli < acsf-database.sql",
+      "@resetdb"
+    ],
+    "build-all": [
+      "@build-clean",
+      "@acsf-backup",
+      "sleep 60 # Waiting for backup.",
+      "@build-drupal"
     ],
     "resetdb": [
-      "composer cc",
+      "@cc",
       "drush @govCMS-SaaS-vagrant.local user-unblock 1",
       "drush @govCMS-SaaS-vagrant.local uli",
       "drush @govCMS-SaaS-vagrant.local -q vset cache 0",
@@ -73,24 +82,38 @@
       "drush @govCMS-SaaS-vagrant.local -q vset views_skip_cache TRUE",
       "drush @govCMS-SaaS-vagrant.local -q vset -y error_level 2",
       "drush @govCMS-SaaS-vagrant.local dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom, shield",
-      "composer cc"
+      "@cc"
     ],
     "cc": [
       "drush @govCMS-SaaS-vagrant.local cc all"
     ],
-    "ccsite": [
+    "acsf-cc": [
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
-	    ],
+    ],
+    "sql-sync": [
+      "@acsf-backup",
+      "sleep 60 # Waiting for backup.",
+      "@acsf-extract",
+      "./vendor/bin/drush @govCMS-SaaS-vagrant.local sql-cli < ./acsf-backup/database.sql",
+      "rm -rf acsf-backup",
+      "@resetdb"
+    ],
     "login": [
       "drush @govCMS-SaaS-vagrant.local uli"
     ]
   },
   "scripts-descriptions": {
-    "config-test": "* Custom: Determine that you can connect to ACSF with the details in sitefactory.yml.",
-    "backup": "* Custom: Create a remote backup.",
-    "download": "* Custom: Download a remote backup ready to import.",
-    "import": "* Custom: todo.",
-    "importdb": "* Custom: todo",
-    "resetdb": "* Custom: Apply developer friendly settings to the current database."
+    "acsf-test": "* Custom: Determine that you can connect to ACSF with the details in sitefactory.yml.",
+    "acsf-backup": "* Custom: Trigger a remote backup - exit immediately, leaving the backup in progress.",
+    "acsf-download": "* Custom: Download the latest backup to acsf-backup.tar.gz.",
+    "acsf-extract": "* Custom: Unzip the latest downloaded back to ./acsf-backup directory.",
+    "build-clean": "* Custom: Removes all the build directories and files.",
+    "build-docroot": "* Custom: Move downloaded directories/files to position. Will download backup if needed.",
+    "build-drupal": "* Custom: imports an existing local database file, and resets everything for development.",
+    "build-all": "* Custom: Cleans up and runs everything from backup to login. Leaves theme-repo directory it if exists.",
+    "resetdb": "* Custom: Fix the database to run locally and support development.",
+    "sql-sync": "* Custom: Makes a fresh remote backup and imports the database locally.",
+    "cc": "* Custom: Cleans local caches.",
+    "acsf-cc": "* Custom: Clears remote caches."
   }
 }

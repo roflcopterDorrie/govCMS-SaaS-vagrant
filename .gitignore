@@ -5,4 +5,8 @@ Vagrantfile
 .beetbox
 .vagrant
 sitefactory.yml
-database.sql
+
+acsf-backup
+acsf-backup.tar.gz
+acsf-database.sql
+theme-repo

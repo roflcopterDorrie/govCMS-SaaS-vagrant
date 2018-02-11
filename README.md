@@ -11,22 +11,25 @@ This tool is designed for Mac and Linux environments.
 
 ## Usage
 
-1. ```git clone``` this repo from github
-2. Run ```composer install```
-3. Copy ```sitefactory.default.yml``` to ```sitefactory.yml``` with you site factory details
-4. Run ```composer download```
-5. Run ```vagrant up```
-6. Run ```composer import```
-7. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally (see Developer tips)
+1. `git clone` this repo from github
+2. Run `composer install`
+3. Run `vagrant up`
+4. Copy `sitefactory.default.yml` to `sitefactory.yml` and modify with your site factory details.
+5. Run `composer build-drupal`
+6. Local site will run at `http://govCMS-SaaS-vagrant.local`
 
-## Import database
+## Refresh database
 
-Run ```composer importdb``` to pull the live database and files and import locally
+Run `composer sql-sync` to pull the live database and files and import locally.
 
 ## Clear cache
 
-Run ```composer cc``` to clear local cache.  
-Run ```composer ccsite``` to clear site factory cache.
+Run `composer cc` to clear local cache.
+Run `composer acsf-cc` to clear site factory cache.
+
+## Other commands
+
+Available custom composer scripts can be seen by running `composer list | grep Custom`.
 
 # Developer tips
 
@@ -39,13 +42,9 @@ DrupalFinder component doesn't recognised this codebase as Drupal.
 export DRUSH_LAUNCHER_FALLBACK=./vendor/bin/drush
 ```
 
-Use `drush site-set @govCMS-SaaS-vagrant.local` to avoid a lot of keystrokes.
-
 To test your `sitefactory.yml` try `composer config-test`, which should list the available sites and try to connect to
 the site configured in your sitefactory.yml.
 
-Available custom composer scripts can be seen by running
-`composer list | grep Custom`.
 
 Any of the [Site Factory CLI commands](https://github.com/rujiali/acquia-site-factory-cli#usage) can be run here
 by running `./vendor/bin/AcquiaSiteFactoryCli` instead of `./bin/AcquiaSiteFactoryCli`.
