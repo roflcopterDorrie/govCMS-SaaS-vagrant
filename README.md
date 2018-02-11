@@ -3,7 +3,10 @@
 ## Description
 
 This is a container that Department of Health is using to implement Acquia Site Factory (ACSF) site
-in local developing evironment.
+in local developing environment.
+
+It is designed to work with any govCMS SaaS site (see `sitefactory.default.yml`), and then allow
+you to pull new improvements regularly.
 
 ## Dependency
 
@@ -50,7 +53,28 @@ Run `composer acsf-cc` to clear site factory cache.
 
 Available custom composer scripts can be seen by running `composer list | grep Custom`.
 
-# Developer tips
+# Developer topics
+
+## Build strategy and theme development
+
+The only things you can control in ACSF is configuration in the production site, and the 
+theme in the repository. For these reason we:
+ 
+* build the local site based on the ACSF download,
+* clone the theme into `./theme-repo` and then link it to the codebase,
+* make database changes remotely, then sync locally.
+
+You can safely rebuild/remove the ./docroot directory without losing any work, including any
+custom settings.php file (see next section).
+
+## Work with any 
+
+
+## Custom settings
+
+The settings.php is based on settings.beetbox.php. You can also have a custom one that is
+stored outside the `docroot`. Just create a settings.local.php in the root and modify any
+configuration you need to.
 
 ## Beetbox domain
 
