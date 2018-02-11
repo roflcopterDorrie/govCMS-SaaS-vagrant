@@ -17,7 +17,7 @@ This tool is designed for Mac and Linux environments.
 4. Run ```composer download```
 5. Run ```vagrant up```
 6. Run ```composer import```
-7. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally
+7. Visit ```http://govCMS-SaaS-vagrant.local``` to see the site running locally (see Developer tips)
 
 ## Import database
 
@@ -30,11 +30,16 @@ Run ```composer ccsite``` to clear site factory cache.
 
 # Developer tips
 
+Beetbox creates the site based on the name of the directory, by default, so if you've cloned the repo into
+a different directory the URL will be DIRECTORY.local. While the drush alias will always be @govCMS-SaaS-vagrant.local
+
 If you are using global Drush launcher, you will need to set the path to Drush as the 
 DrupalFinder component doesn't recognised this codebase as Drupal.
 ```
 export DRUSH_LAUNCHER_FALLBACK=./vendor/bin/drush
 ```
+
+Use `drush site-set @govCMS-SaaS-vagrant.local` to avoid a lot of keystrokes.
 
 To test your `sitefactory.yml` try `composer config-test`, which should list the available sites and try to connect to
 the site configured in your sitefactory.yml.
