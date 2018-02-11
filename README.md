@@ -2,7 +2,8 @@
 
 ## Description
 
-This is a container that Department of Health is using to implement Acquia Site Factory site in local developing evironment.
+This is a container that Department of Health is using to implement Acquia Site Factory (ACSF) site
+in local developing evironment.
 
 ## Dependency
 
@@ -11,16 +12,18 @@ This tool is designed for Mac and Linux environments.
 
 ## Usage
 
-1. `git clone` this repo from github
-2. Run `composer install`
-3. Run `vagrant up`
-4. Copy `sitefactory.default.yml` to `sitefactory.yml` and modify with your site factory details.
-5. Run `composer build-drupal`
-6. Local site will run at `http://govCMS-SaaS-vagrant.local`
+1. `git clone` this repo from github.
+2. `composer install`.
+4. `cp sitefactory.default.yml sitefactory.yml` and modify with your Site Factory details.
+5. `composer acsf-test` to verify connection to ACSF.
+6. `composer build-docroot` to set up the codebase.
+7. `vagrant up` to build Beetbox VM.
+8. `composer build-drupal` sets up the database on the newly minted VM.
+9. Local site will be running at `http://govCMS-SaaS-vagrant.local`.
 
 ## Refresh database
 
-Run `composer sql-sync` to pull the live database and files and import locally.
+Run `composer sync` to pull the live database and files and import locally.
 
 ## Clear cache
 

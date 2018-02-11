@@ -90,7 +90,7 @@
     "acsf-cc": [
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
     ],
-    "sql-sync": [
+    "sync": [
       "@acsf-backup",
       "sleep 60 # Waiting for backup.",
       "@acsf-extract",
@@ -112,7 +112,7 @@
     "build-drupal": "* Custom: imports an existing local database file, and resets everything for development.",
     "build-all": "* Custom: Cleans up and runs everything from backup to login. Leaves theme-repo directory it if exists.",
     "resetdb": "* Custom: Fix the database to run locally and support development.",
-    "sql-sync": "* Custom: Makes a fresh remote backup and imports the database locally.",
+    "sync": "* Custom: Makes a fresh remote backup and imports the database locally.",
     "cc": "* Custom: Cleans local caches.",
     "acsf-cc": "* Custom: Clears remote caches."
   }
