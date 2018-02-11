@@ -1,4 +1,11 @@
+# For details of these settings, see:
+# https://github.com/rujiali/acquia-site-factory-cli#configuration
 username:
-apikey: 
+apikey:
 url:
 site_id:
+
+# Github URL to the theme.
+theme_repo:
+# Name of the theme as it exists in the themes directory.
+theme_name:
