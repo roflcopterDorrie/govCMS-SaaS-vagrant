@@ -4,8 +4,4 @@ username:
 apikey:
 url:
 site_id:
-
-# Github URL to the theme.
 theme_repo:
-# Name of the theme as it exists in the themes directory.
-theme_name:

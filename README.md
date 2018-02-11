@@ -7,10 +7,13 @@ in local developing evironment.
 
 ## Dependency
 
-wget is used for downloading backup from Amazon S3.
+* `composer` and `php`
+* `vagrant` for running Beetbox VM
+* `wget` is used for downloading backup from Amazon S3
+
 This tool is designed for Mac and Linux environments. 
 
-## Usage
+## Quick start
 
 1. `git clone` this repo from github.
 2. `composer install`.
@@ -19,11 +22,24 @@ This tool is designed for Mac and Linux environments.
 6. `composer build-docroot` to set up the codebase.
 7. `vagrant up` to build Beetbox VM.
 8. `composer build-drupal` sets up the database on the newly minted VM.
-9. Local site will be running at `http://govCMS-SaaS-vagrant.local`.
+9. `composer login` to login.
+
+## Config
+
+The `sitefactory.yml` will look something like:
+```
+username: joebloggs
+apikey: abcdef123456abcdef123456abcdef123456
+url: https://www.govcms.acsitefactory.com
+site_id: 1234
+theme_repo: https://github.com/my-organisation/repo-with-theme
+```
+
+# Working with your site
 
 ## Refresh database
 
-Run `composer sync` to pull the live database and files and import locally.
+Run `composer sync` to create a new remote backup, and import the files and database locally.
 
 ## Clear cache
 
@@ -36,22 +52,29 @@ Available custom composer scripts can be seen by running `composer list | grep C
 
 # Developer tips
 
-Beetbox creates the site based on the name of the directory, by default, so if you've cloned the repo into
-a different directory the URL will be DIRECTORY.local. While the drush alias will always be @govCMS-SaaS-vagrant.local
+## Beetbox domain
+
+Beetbox by default will create the site based on the name of the directory. If you've cloned the repo into
+a different directory the URL will be `{DIRECTORY}.local`.
+
+The drush alias will always be @govCMS-SaaS-vagrant.local. 
+
+The project is based on beetbox, so you can override
+[beetbox config](https://github.com/beetboxvm/beetbox/blob/master/.beetbox/config.yml) in .beetbox/config.yml
+
+## Drush launcher
 
 If you are using global Drush launcher, you will need to set the path to Drush as the 
 DrupalFinder component doesn't recognised this codebase as Drupal.
+
 ```
 export DRUSH_LAUNCHER_FALLBACK=./vendor/bin/drush
 ```
 
-To test your `sitefactory.yml` try `composer config-test`, which should list the available sites and try to connect to
-the site configured in your sitefactory.yml.
-
+## Site Factory CLI
 
 Any of the [Site Factory CLI commands](https://github.com/rujiali/acquia-site-factory-cli#usage) can be run here
 by running `./vendor/bin/AcquiaSiteFactoryCli` instead of `./bin/AcquiaSiteFactoryCli`.
 
-The project is based on beetbox, so you can override
-[beetbox config](https://github.com/beetboxvm/beetbox/blob/master/.beetbox/config.yml) in .beetbox/config.yml
+
 
