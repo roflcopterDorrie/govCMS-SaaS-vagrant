@@ -30,8 +30,11 @@ Run ```composer ccsite``` to clear site factory cache.
 
 # Developer tips
 
-The project is based on beetbox, so you can override
-[beetbox config](https://github.com/beetboxvm/beetbox/blob/master/.beetbox/config.yml) in .beetbox/config.yml
+If you are using global Drush launcher, you will need to set the path to Drush as the 
+DrupalFinder component doesn't recognised this codebase as Drupal.
+```
+export DRUSH_LAUNCHER_FALLBACK=./vendor/bin/drush
+```
 
 To test your `sitefactory.yml` try `composer config-test`, which should list the available sites and try to connect to
 the site configured in your sitefactory.yml.
@@ -41,3 +44,7 @@ Available custom composer scripts can be seen by running
 
 Any of the [Site Factory CLI commands](https://github.com/rujiali/acquia-site-factory-cli#usage) can be run here
 by running `./vendor/bin/AcquiaSiteFactoryCli` instead of `./bin/AcquiaSiteFactoryCli`.
+
+The project is based on beetbox, so you can override
+[beetbox config](https://github.com/beetboxvm/beetbox/blob/master/.beetbox/config.yml) in .beetbox/config.yml
+
