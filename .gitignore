@@ -5,7 +5,7 @@ Vagrantfile
 .beetbox
 .vagrant
 sitefactory.yml
-
+settings.local.php
 acsf-backup
 acsf-backup.tar.gz
 acsf-database.sql
