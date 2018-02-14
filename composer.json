@@ -41,7 +41,9 @@
       "vendor/bin/AcquiaSiteFactoryCli app:createBackup"
     ],
     "acsf-download": [
-      "# This command assumes there is already a full site backup.",
+      "# This command will create a full site backup.",
+      "@acsf-backup",
+      "sleep 60 # Waiting for backup.",
       "rm -rf ./acsf-backup",
       "wget --timeout=0 -O acsf-backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)"
     ],
