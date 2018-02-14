@@ -83,7 +83,9 @@
       "drush @govCMS-SaaS-vagrant.local -q vset page_cache_maximum_age 0",
       "drush @govCMS-SaaS-vagrant.local -q vset views_skip_cache TRUE",
       "drush @govCMS-SaaS-vagrant.local -q vset -y error_level 2",
+      "drush @govCMS-SaaS-vagrant.local -q vset theme_debug 1",
       "drush @govCMS-SaaS-vagrant.local dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom, shield",
+      "drush @govCMS-SaaS-vagrant.local en -y devel, dblog",
       "@cc"
     ],
     "cc": [
