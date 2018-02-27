@@ -54,6 +54,7 @@
     ],
     "build-docroot": [
       "if [ ! -d acsf-backup ] ; then `composer acsf-extract` ; fi",
+      "chmod 777 ./docroot/sites/default && chmod 777 ./docroot/sites/default/settings.php",
       "rm -rf ./docroot",
       "mv ./acsf-backup/database.sql ./acsf-database.sql",
       "mv ./acsf-backup/docroot ./",
