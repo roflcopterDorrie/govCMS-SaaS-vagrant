@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad9b4bd654b71c6a64fc74889dbb371c",
+    "content-hash": "5b46aaca12c28a163baaa949b5ae238d",
     "packages": [
         {
             "name": "composer/installers",
@@ -969,16 +969,16 @@
         },
         {
             "name": "rujiali/acquia-site-factory-cli",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rujiali/acquia-site-factory-cli.git",
-                "reference": "b099d24f91f22d29b14c1e3001029edf44ae9d8c"
+                "reference": "83600f9de18b7776139f6370bcbd54e2309dc3b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rujiali/acquia-site-factory-cli/zipball/b099d24f91f22d29b14c1e3001029edf44ae9d8c",
-                "reference": "b099d24f91f22d29b14c1e3001029edf44ae9d8c",
+                "url": "https://api.github.com/repos/rujiali/acquia-site-factory-cli/zipball/83600f9de18b7776139f6370bcbd54e2309dc3b2",
+                "reference": "83600f9de18b7776139f6370bcbd54e2309dc3b2",
                 "shasum": ""
             },
             "require": {
@@ -1030,10 +1030,10 @@
                 "RESTFUL API"
             ],
             "support": {
-                "source": "https://github.com/rujiali/acquia-site-factory-cli/tree/v1.0.1",
+                "source": "https://github.com/rujiali/acquia-site-factory-cli/tree/v1.0.2",
                 "issues": "https://github.com/rujiali/acquia-site-factory-cli/issues"
             },
-            "time": "2018-04-22T23:17:36+00:00"
+            "time": "2018-04-23T04:51:36+00:00"
         },
         {
             "name": "symfony/config",

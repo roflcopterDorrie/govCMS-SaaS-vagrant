@@ -10,7 +10,7 @@
   ],
   "type": "project",
   "require": {
-    "rujiali/acquia-site-factory-cli": "^1.0.1",
+    "rujiali/acquia-site-factory-cli": "^1.0.2",
     "drush/drush": "^8.1",
     "wikimedia/composer-merge-plugin": "^1.4.0",
     "composer/installers": "^1.0.20"
@@ -46,7 +46,7 @@
     "acsf-download": [
       "# This command will create a full site backup.",
       "@acsf-backup",
-      "sleep 60 # Waiting for backup.",
+      "sleep 120 # Waiting for backup.",
       "rm -rf ./acsf-backup",
       "wget --timeout=0 -O acsf-backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)"
     ],
@@ -78,6 +78,8 @@
       "@build-drupal"
     ],
     "resetdb": [
+      "rm -rf acsf-backup.tar.gz",
+      "rm -rf acsf-databases.sql",
       "@cc",
       "drush @govCMS-SaaS-vagrant.local user-unblock 1",
       "drush @govCMS-SaaS-vagrant.local uli",
