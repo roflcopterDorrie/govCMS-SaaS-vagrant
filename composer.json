@@ -10,7 +10,7 @@
   ],
   "type": "project",
   "require": {
-    "rujiali/acquia-site-factory-cli": "dev-master",
+    "rujiali/acquia-site-factory-cli": "^1.0.1",
     "drush/drush": "^8.1",
     "wikimedia/composer-merge-plugin": "^1.4.0",
     "composer/installers": "^1.0.20"
@@ -38,7 +38,10 @@
       "rm -f acsf-backup.tar.gz"
     ],
     "acsf-backup": [
-      "vendor/bin/AcquiaSiteFactoryCli app:createBackup"
+      "vendor/bin/AcquiaSiteFactoryCli app:createBackup Auto-backup"
+    ],
+    "acsf-backup-db": [
+      "vendor/bin/AcquiaSiteFactoryCli app:createBackup Auto-backup database"
     ],
     "acsf-download": [
       "# This command will create a full site backup.",
@@ -48,18 +51,18 @@
       "wget --timeout=0 -O acsf-backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)"
     ],
     "acsf-extract": [
-      "if [ ! -f acsf-backup.tar.gz ] ; then `composer acsf-download` ; fi",
+      "if [ ! -f acsf-backup.tar.gz ] ; then ` composer acsf-download | echo` ; fi",
       "rm -rf ./acsf-backup",
       "mkdir acsf-backup && tar -zxvf acsf-backup.tar.gz -C acsf-backup"
     ],
     "build-docroot": [
       "if [ ! -d acsf-backup ] ; then `composer acsf-extract` ; fi",
-      "chmod 777 ./docroot/sites/default && chmod 777 ./docroot/sites/default/settings.php",
       "rm -rf ./docroot",
       "mv ./acsf-backup/database.sql ./acsf-database.sql",
       "mv ./acsf-backup/docroot ./",
       "rm -rf acsf-backup",
       "cp settings.beetbox.php ./docroot/sites/default/settings.php",
+      "chmod 777 ./docroot/sites/default && chmod 777 ./docroot/sites/default/settings.php",
       "if [ ! -d theme-repo ] ; then REPO=`grep theme_repo sitefactory.yml | cut -d' ' -f2` && git clone $REPO theme-repo ; fi",
       "rm -Rf docroot/sites/default/themes/site && ln -s ../../../../theme-repo docroot/sites/default/themes/site"
     ],
@@ -86,7 +89,6 @@
       "drush @govCMS-SaaS-vagrant.local -q vset -y error_level 2",
       "drush @govCMS-SaaS-vagrant.local -q vset theme_debug 1",
       "drush @govCMS-SaaS-vagrant.local dis -y govcms_tweaks, clamav, acsf, acsf_duplication, acsf_openid, acsf_theme, acsf_variables, acsf_pingdom, shield",
-      "drush @govCMS-SaaS-vagrant.local en -y devel, dblog",
       "@cc"
     ],
     "cc": [
@@ -96,11 +98,16 @@
       "vendor/bin/AcquiaSiteFactoryCli app:clearCache"
     ],
     "sync": [
-      "@acsf-backup",
+      "@acsf-backup-db",
       "sleep 60 # Waiting for backup.",
-      "@acsf-extract",
+      "rm -rf ./acsf-backup.tar.gz",
+      "rm -rf ./acsf-backup",
+      "wget --timeout=0 -O acsf-backup.tar.gz $(vendor/bin/AcquiaSiteFactoryCli app:getLatestBackupURL)",
+      "rm -rf ./acsf-backup",
+      "mkdir acsf-backup && tar -zxvf acsf-backup.tar.gz -C acsf-backup",
       "./vendor/bin/drush @govCMS-SaaS-vagrant.local sql-cli < ./acsf-backup/database.sql",
       "rm -rf acsf-backup",
+      "rm -rf acsf-backup.tar.gz",
       "@resetdb"
     ],
     "login": [
@@ -120,5 +127,8 @@
     "sync": "* Custom: Makes a fresh remote backup and imports the database locally.",
     "cc": "* Custom: Cleans local caches.",
     "acsf-cc": "* Custom: Clears remote caches."
+  },
+  "config": {
+    "process-timeout": 0
   }
 }
