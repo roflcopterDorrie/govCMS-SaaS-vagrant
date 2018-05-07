@@ -62,7 +62,7 @@
       "mv ./acsf-backup/docroot ./",
       "rm -rf acsf-backup",
       "cp settings.beetbox.php ./docroot/sites/default/settings.php",
-      "chmod 777 ./docroot/sites/default && chmod 777 ./docroot/sites/default/settings.php && chmod 777 -R ./docroot/sites/default/files",
+      "chmod 777 -R ./docroot/sites/default",
       "if [ ! -d theme-repo ] ; then REPO=`grep theme_repo sitefactory.yml | cut -d' ' -f2` && git clone $REPO theme-repo ; fi",
       "rm -Rf docroot/sites/default/themes/site && ln -s ../../../../theme-repo docroot/sites/default/themes/site"
     ],
