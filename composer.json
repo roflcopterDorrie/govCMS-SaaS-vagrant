@@ -67,6 +67,7 @@
       "rm -Rf docroot/sites/default/themes/site && ln -s ../../../../theme-repo docroot/sites/default/themes/site"
     ],
     "build-drupal": [
+      "cp ./Vagrantfile.local ./.beetbox/Vagrantfile.local",
       "if [ ! -f acsf-database.sql ] ; then `composer build-docroot` ; fi",
       "./vendor/bin/drush @govCMS-SaaS-vagrant.local sql-cli < acsf-database.sql",
       "@resetdb"
